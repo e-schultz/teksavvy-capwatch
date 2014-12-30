@@ -1,0 +1,16 @@
+{
+  "name": "teksavvy-capwatch",
+  "version": "0.0.0",
+  "homepage": "https://github.com/e-schultz/teksavvy-capwatch",
+  "authors": [
+    "Evan <evan@rangle.io>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

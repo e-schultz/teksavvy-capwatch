@@ -1,0 +1,26 @@
+{
+  "name": "teksavvy-capwatch",
+  "version": "1.0.0",
+  "description": "teksavvy-capwatch =================",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/e-schultz/teksavvy-capwatch.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/e-schultz/teksavvy-capwatch/issues"
+  },
+  "homepage": "https://github.com/e-schultz/teksavvy-capwatch",
+  "dependencies": {
+    "bluebird": "^2.5.2",
+    "express": "^4.10.6",
+    "lodash": "^2.4.1",
+    "ramda": "^0.8.0",
+    "request": "^2.51.0"
+  }
+}
