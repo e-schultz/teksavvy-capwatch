@@ -9,7 +9,7 @@ var app = express();
 
 var url = 'https://api.teksavvy.com/web/Usage/UsageRecords';
 var headers = {
-  'Teksavvy-APIKey': 'B5F0260CC71F09EF0FB9643A707F0307'
+  'Teksavvy-APIKey': process.env.TEKSAVVY_KEY
 };
 
 var pRequest = bluebird.promisify(request)
