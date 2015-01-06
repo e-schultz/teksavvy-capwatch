@@ -42,27 +42,29 @@ function fixDate(input) {
 
 }
 
-function filterIt(input) {
-  var curDate, endDate;
-  curDate = new Date();
-  curDate.setDate(1);
-  endDate = new Date(curDate.getFullYear(), curDate.getMonth() + 1, 0);
-  curDate = new Date(curDate.getFullYear(), curDate.getMonth(), 1);
+var afterMonthStart = R.filter(R.curry(function (currentDate, inputDate) {
+
+  var startDate = new Date(currentDate.getFullYear(),
+    currentDate.getMonth(),
+    1);
+
+  return (inputDate.Date >= startDate);
+})(new Date()));
 
 
-  var result = (input.Date >= curDate && input.Date <= endDate);
+var beforeMonthEnd = R.filter(R.curry(function (currentDate, inputDate) {
+  var endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() +
+    1, 0);
+  return (inputDate.Date <= endDate)
+})(new Date()));
 
-  return result;
-
-
-}
 
 var getResult = R.pPipe(doRequest,
   R.pluck('body'),
   getValue,
   R.map(fixDate),
-  R.filter(filterIt),
-  logIt,
+  afterMonthStart,
+  beforeMonthEnd,
   R.pluck('OnPeakDownload'),
   R.sum
 );
