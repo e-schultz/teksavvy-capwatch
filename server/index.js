@@ -42,29 +42,36 @@ function fixDate(input) {
 
 }
 
-var afterMonthStart = R.filter(R.curry(function (currentDate, inputDate) {
+function getFirstOfMonth(date) {
+  date = new Date(date.getFullYear(), date.getMonth(), 1);
+  return date;
+}
 
-  var startDate = new Date(currentDate.getFullYear(),
-    currentDate.getMonth(),
-    1);
+function getLastOfMonth(date) {
+  date = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+  return date;
+}
 
-  return (inputDate.Date >= startDate);
-})(new Date()));
+function isAfterDate(date, inputDate) {
 
+  var date = getFirstOfMonth(date);
+  return (inputDate.Date >= date);
+}
 
-var beforeMonthEnd = R.filter(R.curry(function (currentDate, inputDate) {
-  var endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() +
-    1, 0);
-  return (inputDate.Date <= endDate)
-})(new Date()));
+function isBeforeDate(date, inputDate) {
+  var endDate = getLastOfMonth(date);
+  return (inputDate.Date <= date)
+}
 
+var afterMonthStart = R.curry(isAfterDate)(new Date());
+var beforeMonthEnd = R.curry(isBeforeDate)(new Date());
 
 var getResult = R.pPipe(doRequest,
   R.pluck('body'),
   getValue,
   R.map(fixDate),
-  afterMonthStart,
-  beforeMonthEnd,
+  R.filter(afterMonthStart),
+  R.filter(beforeMonthEnd),
   R.pluck('OnPeakDownload'),
   R.sum
 );
@@ -78,6 +85,6 @@ app.get('/', function (req, res) {
 });
 
 logResult();
-//});
+
 
 app.listen(process.env.PORT || 3000);
