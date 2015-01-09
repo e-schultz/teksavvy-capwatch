@@ -23,10 +23,6 @@ function doRequest() {
   });
 }
 
-function getValue(input) {
-  return input[0].value
-}
-
 function logIt(input) {
   console.log(JSON.stringify(input, null, ' '));
   return input;
@@ -43,11 +39,13 @@ function fixDate(input) {
 }
 
 function getFirstOfMonth(date) {
+
   date = new Date(date.getFullYear(), date.getMonth(), 1);
   return date;
 }
 
 function getLastOfMonth(date) {
+
   date = new Date(date.getFullYear(), date.getMonth() + 1, 0);
   return date;
 }
@@ -56,11 +54,14 @@ function isAfterDate(date, inputDate) {
 
   var date = getFirstOfMonth(date);
   return (inputDate.Date >= date);
+
 }
 
 function isBeforeDate(date, inputDate) {
+
   var endDate = getLastOfMonth(date);
   return (inputDate.Date <= date)
+
 }
 
 var afterMonthStart = R.curry(isAfterDate)(new Date());
