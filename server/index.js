@@ -68,7 +68,8 @@ var beforeMonthEnd = R.curry(isBeforeDate)(new Date());
 
 var getResult = R.pPipe(doRequest,
   R.pluck('body'),
-  getValue,
+  R.head,
+  R.prop('value'),
   R.map(fixDate),
   R.filter(afterMonthStart),
   R.filter(beforeMonthEnd),
